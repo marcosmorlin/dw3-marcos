@@ -1,5 +1,5 @@
 //@ Importa as bibliotecas
-2 const express = require("express");
+2 const express = require("express")
 3 require("dotenv").config();
 4
 5 //@ Configura o servidor
