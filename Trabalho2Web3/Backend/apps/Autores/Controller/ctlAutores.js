@@ -1,14 +1,14 @@
-const mdlCursos = require("../model/mdlAutores");
+const mdlAutores = require("../model/mdlAutores");
 
 const GetAllAutores = (req, res) =>
     (async () => {
-      let registro = await mdlAutores.GetAllCursos();
+      let registro = await mdlAutores.GetAllAutores();
       res.json({ status: "ok", registro: registro });
     })();
 
 const GetAutorByID = (req, res) =>
   (async () => {
-    const ID = parseInt(req.body.cursoid);
+    const ID = parseInt(req.body.id);
     let registro = await mdlAutores.GetAutorByID(ID);
 
     res.json({ status: "ok", registro: registro });

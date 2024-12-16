@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "../../DW1A4-2023-Marcos"
+		},
+		{
+			"path": "../../DW2-2024-Marcos"
+		},
+		{
+			"path": "../../DW1-2023-Marcos"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"git.showPushSuccessNotification": false
+	}
+}

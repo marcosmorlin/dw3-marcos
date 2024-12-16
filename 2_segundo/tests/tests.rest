@@ -1,0 +1,13 @@
+### arquivo: tests/tests.rest
+2
+3 ### teste de API /
+4 GET http://localhost:40000/ HTTP/1.1
+5 content-type: application/json
+6
+7 ### teste de API helloUser
+8 POST http://localhost:40000/helloUser HTTP/1.1
+9 content-type: application/json
+10
+11 {
+12 "username": "John Doe"
+13 }
