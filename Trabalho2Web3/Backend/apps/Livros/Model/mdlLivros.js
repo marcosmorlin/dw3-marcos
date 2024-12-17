@@ -29,7 +29,7 @@ const insertLivros = async (livroREGPar) => {
             "INSERT INTO livros " + "values(default, $1, $2, $3, $4, $5)",
             [
                 livroREGPar.titulo,
-                livroREGPar.autor_id,
+                livroREGPar.preco,
                 livroREGPar.data_publicacao,
                 livroREGPar.autor_id,
                 livroREGPar.deleted

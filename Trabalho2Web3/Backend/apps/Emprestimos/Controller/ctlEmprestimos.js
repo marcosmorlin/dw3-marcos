@@ -1,4 +1,4 @@
-const mdlAlunos = require("../model/mdlAlunos");
+const mdlEmprestimos = require("../model/mdlEmprestimos");
 
 const getAllEmprestimos = (req, res) =>
     (async () => {
@@ -15,7 +15,7 @@ const getAllEmprestimos = (req, res) =>
 const getEmprestimoByID = (req, res) =>
     (async () => {
       const alunoID = parseInt(req.body.id);
-      let registro = await mdlEmprestimos.getAlunoByID(ID);
+      let registro = await mdlEmprestimos.getEmprestimoByID(ID);
   
   
       res.json({ status: "ok", "registro": registro });

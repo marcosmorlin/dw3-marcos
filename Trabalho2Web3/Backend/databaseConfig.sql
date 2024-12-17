@@ -41,7 +41,6 @@ CREATE TABLE emprestimos (
 CREATE TABLE login (
 
 id SERIAL PRIMARY KEY,
-
 senha VARCHAR (150)
 email(150) UNIQUE NOT NULL,
 softDelete boolean default false
