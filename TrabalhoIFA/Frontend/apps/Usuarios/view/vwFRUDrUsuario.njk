@@ -1,0 +1,108 @@
+{% extends "templates/base.html" %}
+
+{% block content %}
+  <div x-data="usuarioForm()">
+    <ol class="breadcrumb mb-2">
+      <li class="breadcrumb-item active">{{ title }}</li>
+    </ol>
+    <div class="row">
+      <div class="col-12">
+        <div class="card-header">
+          {{ title }}
+        </div>
+
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="codigo">Código</label>
+                  <input type="text" class="form-control" id="codigo" x-model="form.codigo" :disabled="disabled">
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="descricao">Descrição</label>
+                  <input type="text" class="form-control" id="descricao" x-model="form.descricao" :disabled="disabled">
+                </div>
+              </div>
+            </div>
+
+            <button type="button" @click="updateForm()" class="btn btn-primary mt-4">Salvar</button>
+            <button type="button" @click="deleteForm()" x-show="!disabled" class="btn btn-danger mt-4">Excluir</button>
+            <a href="/usuarios/manutUsuarios" class="btn btn-info mt-4 ml-2">Retornar</a>
+          </form>
+
+          <div class="mt-3">
+            <template x-if="message">
+              <div :class="messageClass" x-text="message"></div>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function usuarioForm() {
+        return {
+          form: {
+            codigo: "{{ usuario.codigo }}",
+            descricao: "{{ usuario.descricao }}",
+            id: "{{ usuario.id }}"
+          },
+          message: '',
+          messageClass: '',
+          disabled: {{ disabled }},
+
+          async updateForm() {
+            try {
+              const response = await fetch('/usuario/updateUsuario', {
+                method: 'POST',
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(this.form)
+              });
+
+              const result = await response.json();
+              if (result.status === "ok") {
+                alert("Usuário atualizado com sucesso");
+              } else {
+                this.message = `Erro! Não foi possível atualizar o usuário devido ao erro: ${result.status}`;
+                this.messageClass = 'alert alert-danger';
+              }
+            } catch (error) {
+              this.message = `Erro de conexão: ${error.message}`;
+              this.messageClass = 'alert alert-danger';
+            }
+          },
+
+          async deleteForm() {
+            try {
+              const response = await fetch('/usuario/deleteUsuario', {
+                method: 'POST',
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(this.form)
+              });
+
+              const result = await response.json();
+              if (result.status === "ok") {
+                alert("Usuário excluído com sucesso");
+                window.location.href = "/usuarios/manutUsuarios";
+              } else {
+                this.message = `Erro! Não foi possível excluir o usuário devido ao erro: ${result.status}`;
+                this.messageClass = 'alert alert-danger';
+              }
+            } catch (error) {
+              this.message = `Erro de conexão: ${error.message}`;
+              this.messageClass = 'alert alert-danger';
+            }
+          }
+        };
+      }
+    </script>
+  
+{% endblock %}

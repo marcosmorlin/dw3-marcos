@@ -1,0 +1,68 @@
+{% extends "templates/base.html" %}
+
+{% block content %}
+  <ol class="breadcrumb mb-2">
+    <li class="breadcrumb-item active">{{ title }}</li>
+  </ol>
+  <div class="row">
+    <div class="col-xl-12">
+
+      <div class="card-header">
+        Manutenção de Usuários
+      </div>
+
+      <div class="card-body">
+        <div class="">
+          <div style="margin-bottom: 15px;">
+            <a href="/usuario/insertUsuario" class="btn btn-primary">
+              Inserir novo usuário
+            </a>
+          </div>
+
+          <div style="background-color: #f8f9fa">
+            <table id="tabUsuarios" class="display" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Ação</th>
+                  <th>Código</th>
+                  <th>Descrição</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for usuario in usuarios %}
+                  <tr>
+                    <td>
+                      {# Link para visualização dos dados #}
+                      <a href="/usuario/viewUsuario/{{ usuario.id }}" title="Visualizar">
+                        <i class="fas fa-search"></i>
+                      </a>
+
+                      {# Link para atualização e remoção dos dados #}
+                      <a href="/usuario/UpdateUsuario/{{ usuario.id }}" title="Atualizar" style="margin-left: 10px;">
+                        <i class="fas fa-pencil-alt"></i>
+                      </a>
+                    </td>
+                    <td>{{ usuario.codigo }}</td>
+                    <td>{{ usuario.descricao }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function () {
+      windowOnLoad();
+      const localErro = "{{ erro }}";
+      if (localErro != "") {
+        alert("[ManutUsuario|onload]Servidor retornou o erro:" + localErro);
+      }
+      new DataTable('#tabUsuarios');
+    };
+  </script>
+
+{% endblock %}
